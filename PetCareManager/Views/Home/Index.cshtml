@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<PetCareManager.Models.User> UserManager
+
+@{
+    ViewData["Title"] = "Home";
+    var user = await UserManager.GetUserAsync(User);
+    var roles = await UserManager.GetRolesAsync(user);
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f0f4f8;
+        padding: 40px;
+    }
+
+    .home-box {
+        max-width: 400px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .info {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="home-box">
+    <h2>Welcome</h2>
+    <div class="info">
+        <p><strong>Username:</strong> @user.UserName</p>
+        <p><strong>Email:</strong> @user.Email</p>
+        <p><strong>Role:</strong> @roles.FirstOrDefault()</p>
+    </div>
+    <form method="post" action="/Account/Logout">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
 </div>

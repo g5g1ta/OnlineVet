@@ -1,0 +1,10 @@
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<PetCareManager.Models.User> UserManager
+
+@{
+    ViewData["Title"] = "Home";
+    var user = await UserManager.GetUserAsync(User);
+    var roles = await UserManager.GetRolesAsync(user);
+}
+
+<h1>@roles.FirstOrDefault()</h1>
