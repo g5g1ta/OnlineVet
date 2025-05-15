@@ -289,6 +289,7 @@ namespace PetCareManager.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")

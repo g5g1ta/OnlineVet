@@ -6,7 +6,6 @@ namespace PetCareManager.Models
 {
     public class User: IdentityUser<int>
     {
-    
     }
 
 }

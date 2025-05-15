@@ -22,5 +22,8 @@ namespace PetCareManager.ViewModels
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
     }
 }

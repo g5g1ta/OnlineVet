@@ -7,6 +7,5 @@ public class VetSchedule
     public User Vet { get; set; }
     public TimeSpan AvailableFrom { get; set; } 
     public TimeSpan AvailableTo { get; set; }  
-
     public bool IsAvailable { get; set; }
 }

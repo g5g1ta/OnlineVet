@@ -12,8 +12,8 @@ using PetCareManager.Data;
 namespace PetCareManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250515021103_PlsWork5")]
-    partial class PlsWork5
+    [Migration("20250515160625_PhoneNumber")]
+    partial class PhoneNumber
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -292,6 +292,7 @@ namespace PetCareManager.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")

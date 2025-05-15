@@ -1,0 +1,101 @@
+@model IEnumerable<PetCareManager.ViewModels.VetScheduleViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Available Vets</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        th, td {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #e6f2ff;
+        }
+
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+
+        .not-available {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Available Vets</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Availability</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model == null || !Model.Any())
+            {
+                <tr>
+                    <td colspan="5" style="text-align:center;">No available vets found.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var vet in Model)
+                {
+                    <tr>
+                        <td>@vet.UserName</td>
+                        <td>@vet.Email</td>
+                        <td>@vet.PhoneNumber</td>
+                        <td>
+                            @if (vet.IsAvailable)
+                            {
+                                <p>@vet.AvailableFrom.ToString() - @vet.AvailableTo.ToString()</p>
+                            }
+                            else
+                            {
+                                <span>N/A</span>
+                            }
+                        </td>
+                        <td>
+                            @if (vet.IsAvailable)
+                            {
+                                <span class="available">Available</span>
+                            }
+                            else
+                            {
+                                <span class="not-available">Not Available</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

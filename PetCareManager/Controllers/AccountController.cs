@@ -27,7 +27,7 @@ namespace PetCareManager.Controllers
         {
             if(!ModelState.IsValid) return View(model);
 
-            var user = new User {Email = model.Email, UserName = model.Username};
+            var user = new User {Email = model.Email, UserName = model.Username, PhoneNumber = model.PhoneNumber};
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -70,7 +70,7 @@ namespace PetCareManager.Controllers
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout(){
 
             await _signInManager.SignOutAsync();
