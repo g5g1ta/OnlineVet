@@ -25,9 +25,13 @@
             <tr>
                 <td>@pet.Name</td>
                 <td>@pet.Breed</td>
-                <td>@pet.Gender</td>
+                <td>@pet.Gender</td>              
                 <td>@pet.DateOfBirth.ToShortDateString()</td>
                 <td>@pet.MedicalHistory</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Pet", new { id = pet.PetId })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Pet", new { id = pet.PetId })" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
