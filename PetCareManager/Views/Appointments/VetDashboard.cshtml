@@ -1,0 +1,47 @@
+@model IEnumerable<PetCareManager.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Vet Dashboard";
+}
+
+<h2>Your Appointments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pet</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var appt in Model)
+{
+    <tr>
+        <td>@appt.Pet.Name</td>
+        <td>@appt.AppointmentDate.ToString("f")</td>
+        <td>@appt.Status</td>
+        <td>
+            @if (appt.Status == AppointmentStatus.Pending)
+            {
+                <form asp-action="UpdateStatus" method="post" style="display:inline;">
+                    <input type="hidden" name="appointmentId" value="@appt.AppointmentId" />
+                    <input type="hidden" name="status" value="Completed" />
+                    <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                </form>
+                <form asp-action="UpdateStatus" method="post" style="display:inline;">
+                    <input type="hidden" name="appointmentId" value="@appt.AppointmentId" />
+                    <input type="hidden" name="status" value="Cancelled" />
+                    <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+                </form>
+            }
+            else
+            {
+                <span class="text-muted">No actions</span>
+            }
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

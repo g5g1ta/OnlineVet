@@ -55,6 +55,7 @@
                 <th>Phone Number</th>
                 <th>Availability</th>
                 <th>Status</th>
+                <th>Make Appointment</th>
             </tr>
         </thead>
         <tbody>
@@ -91,6 +92,14 @@
                             {
                                 <span class="not-available">Not Available</span>
                             }
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" 
+                                asp-controller="Appointments" 
+                                asp-action="Create" 
+                                asp-route-vetId="@vet.UserId">
+                                Make Appointment
+                            </a>
                         </td>
                     </tr>
                 }

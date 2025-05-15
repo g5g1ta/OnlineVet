@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Create Appointment";
+}
+
+<h2>Make Appointment</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" name="vetId" value="@ViewBag.VetId" />
+
+    <div class="form-group">
+        <label for="appointmentDate">Date</label>
+        <input type="datetime-local" class="form-control" name="appointmentDate" required />
+    </div>
+
+    <div class="form-group">
+        <label for="petId">Your Pet</label>
+        <select name="petId" class="form-control" required>
+            @foreach (var pet in (List<PetCareManager.Models.Pet>)ViewBag.Pets)
+            {
+                <option value="@pet.PetId">@pet.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Confirm Appointment</button>
+</form>
