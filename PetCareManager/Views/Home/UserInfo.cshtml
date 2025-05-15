@@ -1,0 +1,13 @@
+@model PetCareManager.ViewModels.UserInfoViewModel
+
+<h2>User Profile</h2>
+
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Phone:</strong> @Model.Username</p>
+<p><strong>Roles:</strong></p>
+<ul>
+    @foreach (var role in Model.Roles)
+    {
+        <li>@role</li>
+    }
+</ul>

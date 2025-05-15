@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetCareManager.Models;
+using PetCareManager.ViewModels;
 
 namespace PetCareManager.Controllers;
 
@@ -37,6 +38,20 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
+    }
+    public async Task<IActionResult> UserInfo()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        var roles = await _userManager.GetRolesAsync(user);
+
+        var model = new UserInfoViewModel
+        {
+            Email = user.Email,
+            Username = user.UserName,
+            Roles = roles.ToList()
+        };
+
+        return View(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
