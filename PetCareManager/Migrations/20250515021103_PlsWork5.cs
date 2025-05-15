@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PetCareManager.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class PlsWork5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -203,21 +203,19 @@ namespace PetCareManager.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Gender = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MedicalHistory = table.Column<string>(type: "longtext", nullable: false)
+                    MedicalHistory = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OwnerId = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OwnerId1 = table.Column<int>(type: "int", nullable: false)
+                    OwnerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pets", x => x.PetId);
                     table.ForeignKey(
-                        name: "FK_Pets_AspNetUsers_OwnerId1",
-                        column: x => x.OwnerId1,
+                        name: "FK_Pets_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -227,9 +225,7 @@ namespace PetCareManager.Migrations
                 {
                     VetScheduleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    VetId = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    VetId1 = table.Column<int>(type: "int", nullable: false),
+                    VetId = table.Column<int>(type: "int", nullable: false),
                     AvailableFrom = table.Column<TimeSpan>(type: "time(6)", nullable: false),
                     AvailableTo = table.Column<TimeSpan>(type: "time(6)", nullable: false),
                     IsAvailable = table.Column<bool>(type: "tinyint(1)", nullable: false)
@@ -238,11 +234,11 @@ namespace PetCareManager.Migrations
                 {
                     table.PrimaryKey("PK_VetSchedules", x => x.VetScheduleId);
                     table.ForeignKey(
-                        name: "FK_VetSchedules_AspNetUsers_VetId1",
-                        column: x => x.VetId1,
+                        name: "FK_VetSchedules_AspNetUsers_VetId",
+                        column: x => x.VetId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -254,20 +250,18 @@ namespace PetCareManager.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     AppointmentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     PetId = table.Column<int>(type: "int", nullable: false),
-                    VetId = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    VetId1 = table.Column<int>(type: "int", nullable: false),
+                    VetId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
                     table.ForeignKey(
-                        name: "FK_Appointments_AspNetUsers_VetId1",
-                        column: x => x.VetId1,
+                        name: "FK_Appointments_AspNetUsers_VetId",
+                        column: x => x.VetId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Appointments_Pets_PetId",
                         column: x => x.PetId,
@@ -287,19 +281,17 @@ namespace PetCareManager.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     PetId = table.Column<int>(type: "int", nullable: false),
-                    VetId = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    VetId1 = table.Column<int>(type: "int", nullable: false)
+                    VetId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicalRecords", x => x.MedicalRecordId);
                     table.ForeignKey(
-                        name: "FK_MedicalRecords_AspNetUsers_VetId1",
-                        column: x => x.VetId1,
+                        name: "FK_MedicalRecords_AspNetUsers_VetId",
+                        column: x => x.VetId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MedicalRecords_Pets_PetId",
                         column: x => x.PetId,
@@ -315,9 +307,9 @@ namespace PetCareManager.Migrations
                 column: "PetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_VetId1",
+                name: "IX_Appointments_VetId",
                 table: "Appointments",
-                column: "VetId1");
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -362,19 +354,19 @@ namespace PetCareManager.Migrations
                 column: "PetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalRecords_VetId1",
+                name: "IX_MedicalRecords_VetId",
                 table: "MedicalRecords",
-                column: "VetId1");
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pets_OwnerId1",
+                name: "IX_Pets_OwnerId",
                 table: "Pets",
-                column: "OwnerId1");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VetSchedules_VetId1",
+                name: "IX_VetSchedules_VetId",
                 table: "VetSchedules",
-                column: "VetId1");
+                column: "VetId");
         }
 
         /// <inheritdoc />

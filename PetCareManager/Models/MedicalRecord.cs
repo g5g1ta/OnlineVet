@@ -10,7 +10,7 @@ namespace PetCareManager.Models
         public Pet Pet { get; set; }
 
     
-        public string VetId { get; set; }
+        public int VetId { get; set; }
         public User Vet { get; set; }
 }
 

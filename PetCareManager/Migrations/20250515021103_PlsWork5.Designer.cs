@@ -12,8 +12,8 @@ using PetCareManager.Data;
 namespace PetCareManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250506144559_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250515021103_PlsWork5")]
+    partial class PlsWork5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,18 +174,14 @@ namespace PetCareManager.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("VetId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("VetId1")
+                    b.Property<int>("VetId")
                         .HasColumnType("int");
 
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("PetId");
 
-                    b.HasIndex("VetId1");
+                    b.HasIndex("VetId");
 
                     b.ToTable("Appointments");
                 });
@@ -208,18 +204,14 @@ namespace PetCareManager.Migrations
                     b.Property<int>("PetId")
                         .HasColumnType("int");
 
-                    b.Property<string>("VetId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("VetId1")
+                    b.Property<int>("VetId")
                         .HasColumnType("int");
 
                     b.HasKey("MedicalRecordId");
 
                     b.HasIndex("PetId");
 
-                    b.HasIndex("VetId1");
+                    b.HasIndex("VetId");
 
                     b.ToTable("MedicalRecords");
                 });
@@ -244,23 +236,18 @@ namespace PetCareManager.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("MedicalHistory")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("OwnerId1")
+                    b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
                     b.HasKey("PetId");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
                 });
@@ -349,16 +336,12 @@ namespace PetCareManager.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("VetId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("VetId1")
+                    b.Property<int>("VetId")
                         .HasColumnType("int");
 
                     b.HasKey("VetScheduleId");
 
-                    b.HasIndex("VetId1");
+                    b.HasIndex("VetId");
 
                     b.ToTable("VetSchedules");
                 });
@@ -424,8 +407,8 @@ namespace PetCareManager.Migrations
 
                     b.HasOne("PetCareManager.Models.User", "Vet")
                         .WithMany()
-                        .HasForeignKey("VetId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Pet");
@@ -443,8 +426,8 @@ namespace PetCareManager.Migrations
 
                     b.HasOne("PetCareManager.Models.User", "Vet")
                         .WithMany()
-                        .HasForeignKey("VetId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Pet");
@@ -456,8 +439,8 @@ namespace PetCareManager.Migrations
                 {
                     b.HasOne("PetCareManager.Models.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Owner");
@@ -467,8 +450,8 @@ namespace PetCareManager.Migrations
                 {
                     b.HasOne("PetCareManager.Models.User", "Vet")
                         .WithMany()
-                        .HasForeignKey("VetId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Vet");

@@ -1,12 +1,11 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<PetCareManager.Models.User> UserManager
-
-@{
+﻿@{
     ViewData["Title"] = "Home";
-    var user = await UserManager.GetUserAsync(User);
-    var roles = await UserManager.GetRolesAsync(user);
-}
 
+    var roles = ViewData["Roles"] as IList<string> ?? new List<string>();
+
+    var username = User.Identity?.Name ?? "Guest";
+    var email = ViewData["Email"] as string ?? "No email";
+}
 <style>
     body {
         font-family: 'Segoe UI', sans-serif;
@@ -35,8 +34,8 @@
 <div class="home-box">
     <h2>Welcome</h2>
     <div class="info">
-        <p><strong>Username:</strong> @user.UserName</p>
-        <p><strong>Email:</strong> @user.Email</p>
+        <p><strong>Username:</strong> @username</p>
+        <p><strong>Email:</strong> @email</p>
         <p><strong>Role:</strong> @roles.FirstOrDefault()</p>
     </div>
     <form method="post" action="/Account/Logout">

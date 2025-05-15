@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetCareManager.Models;
 
@@ -9,14 +10,27 @@ namespace PetCareManager.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly UserManager<User> _userManager;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
     {
         _logger = logger;
+        _userManager = userManager;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return Challenge();
+        }
+        Console.WriteLine("User Email: " + user.Email);
+        var roles = await _userManager.GetRolesAsync(user);
+
+        ViewData["Roles"] = roles;
+        ViewData["Email"] = user?.Email ?? "No email";
+
         return View();
     }
     

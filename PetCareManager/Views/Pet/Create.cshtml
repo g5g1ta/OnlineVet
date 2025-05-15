@@ -1,0 +1,42 @@
+@model PetCareManager.Models.Pet
+
+@{
+    ViewData["Title"] = "Create Pet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Pet</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Breed"></label>
+        <input asp-for="Breed" class="form-control" />
+        <span asp-validation-for="Breed" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth" class="form-control" type="date" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <input asp-for="Gender" class="form-control" />
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
