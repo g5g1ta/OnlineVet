@@ -4,34 +4,63 @@
     ViewData["Title"] = "Edit Pet";
 }
 
-<h2>Edit Pet</h2>
+<div class="d-flex justify-content-center mt-5">
+    <div class="card shadow-sm" style="width: 400px;">
+        <div class="card-body">
+            <h2 class="card-title mb-4 text-center">Edit Pet</h2>
 
-<form asp-action="Edit" method="post" asp-route-id="@Model.PetId">
+            <form asp-action="Edit" method="post" asp-route-id="@Model.PetId" novalidate>
+                <input type="hidden" asp-for="PetId" />
 
-    <input type="hidden" asp-for="PetId" />
-    <div class="form-group">
-        <label for="Name">Name</label>
-        <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" required />
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter pet's name" required />
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Breed" class="form-label">Breed</label>
+                    <input asp-for="Breed" class="form-control" placeholder="Enter breed" required />
+                    <span asp-validation-for="Breed" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" required />
+                    <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Gender" class="form-label">Gender</label>
+                    <select asp-for="Gender" class="form-select" required>
+                        <option value="">Select gender</option>
+                        @if (Model.Gender == "Male")
+                        {
+                            <option value="Male" selected="selected">Male</option>
+                            <option value="Female">Female</option>
+                        }
+                        else if (Model.Gender == "Female")
+                        {
+                            <option value="Male">Male</option>
+                            <option value="Female" selected="selected">Female</option>
+                        }
+                        else
+                        {
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        }
+                    </select>
+
+                    <span asp-validation-for="Gender" class="text-danger small"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 fw-semibold mb-2">Save</button>
+                <a href="@Url.Action("Index", "Pet")" class="btn btn-secondary w-100">Cancel</a>
+            </form>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="Breed">Breed</label>
-        <input type="text" id="Breed" name="Breed" class="form-control" value="@Model.Breed" required />
-    </div>
-
-    <div class="form-group">
-        <label for="DateOfBirth">Date of Birth</label>
-        <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" required />
-    </div>
-
-    <div class="form-group">
-        <label for="Gender">Gender</label>
-        <select id="Gender" name="Gender" class="form-control" required>
-            <!option value="Male" @((Model.Gender == "Male") ? "selected" : "")>Male</!option>
-            <!option value="Female" @((Model.Gender == "Female") ? "selected" : "")>Female</!option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="@Url.Action("Index", "Pet")" class="btn btn-secondary">Cancel</a>
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

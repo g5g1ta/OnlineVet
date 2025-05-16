@@ -10,83 +10,85 @@
         background-color: #f7f9fc;
     }
 
-    h2 {
+    .login-wrapper {
+        max-width: 420px;
+        margin: 60px auto;
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+        border: 2px solid #9e9e9e;
+    }
+
+    .login-title {
         text-align: center;
-        margin-top: 40px;
+        color: #343a40;
+        margin-bottom: 30px;
     }
 
-    form {
-        max-width: 400px;
-        margin: 40px auto;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
         display: block;
-        margin-bottom: 5px;
+    }
+
+    .form-control {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 10px;
+        font-weight: bold;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-register {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #007bff;
         font-weight: 600;
     }
 
-    input.form-control {
-        width: 100%;
-        padding: 8px 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    button.btn, 
-    a.btn-register {
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-align: center;
-        display: block;
-        text-decoration: none;
-        margin-top: 15px;
+    .btn-register:hover {
+        text-decoration: underline;
     }
 
     .text-danger {
-        color: red;
         font-size: 0.9em;
-    }
-    .register-container {
-        max-width: 350px;
-        margin: 0 auto 40px auto;
     }
 </style>
 
-<h2>Login</h2>
+<div class="login-wrapper">
+    <h2 class="login-title">Login</h2>
 
-<form asp-action="Login" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <form asp-action="Login" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+        <div class="form-group mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" type="password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
+        <div class="form-group mb-4">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" type="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn">Login</button>
-</form>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 
-<div class="register-container">
-    <a asp-controller="Account" asp-action="Register" class="btn-register">Register</a>
+    <a asp-controller="Account" asp-action="Register" class="btn-register">Don't have an account? Register</a>
 </div>

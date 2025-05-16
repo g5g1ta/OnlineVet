@@ -5,43 +5,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Pet</h2>
+<div class="d-flex justify-content-center mt-5">
+    <div class="card shadow-sm" style="width: 400px;">
+        <div class="card-body">
+            <h2 class="card-title mb-4 text-center">Create Pet</h2>
 
-<form asp-action="Create" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Create" method="post" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Pet Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter pet's name" />
+                    <span asp-validation-for="Name" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group">
-        <label asp-for="Breed"></label>
-        <input asp-for="Breed" class="form-control" />
-        <span asp-validation-for="Breed" class="text-danger"></span>
-    </div>
+                <div class="mb-3">
+                    <label asp-for="Breed" class="form-label">Breed</label>
+                    <input asp-for="Breed" class="form-control" placeholder="Enter breed" />
+                    <span asp-validation-for="Breed" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group">
-        <label asp-for="DateOfBirth"></label>
-        <input asp-for="DateOfBirth" class="form-control" type="date" />
-        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-    </div>
+                <div class="mb-3">
+                    <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                </div>
 
-    <div class="form-group"> 
-        <label>Gender</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" id="GenderMale" name="Gender" value="Male" @(Model?.Gender == "Male" ? "checked" : "") />
-            <label class="form-check-label" for="GenderMale">Male</label>
+                <div class="mb-4">
+                    <label class="form-label d-block">Gender</label>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="Male" id="GenderMale" />
+                        <label class="form-check-label" for="GenderMale">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="Female" id="GenderFemale" />
+                        <label class="form-check-label" for="GenderFemale">Female</label>
+                    </div>
+                    <span asp-validation-for="Gender" class="text-danger small d-block mt-1"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 fw-semibold">Save Pet</button>
+            </form>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" id="GenderFemale" name="Gender" value="Female" @(Model?.Gender == "Female" ? "checked" : "") />
-            <label class="form-check-label" for="GenderFemale">Female</label>
-        </div>
     </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

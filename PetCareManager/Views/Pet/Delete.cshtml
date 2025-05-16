@@ -4,24 +4,48 @@
     ViewData["Title"] = "Delete Pet";
 }
 
-<h1>Delete Pet</h1>
+<div class="container mt-5" style="max-width: 600px;">
+    <h1 class="mb-4 text-primary">Delete Pet</h1>
 
-<h3>Are you sure you want to delete this pet?</h3>
-<div>
-    <h4>@Model.Name</h4>
-    <dl class="dl-horizontal">
-        <dt>Breed</dt>
-        <dd>@Model.Breed</dd>
-        <dt>Gender</dt>
-        <dd>@Model.Gender</dd>
-        <dt>Date of Birth</dt>
-        <dd>@Model.DateOfBirth.ToShortDateString()</dd>
-        <dt>Medical History</dt>
-    </dl>
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Please confirm</h4>
+        <p>Are you sure you want to remove the following pet from your records?</p>
+        <p class="mb-0"><strong>@Model.Name</strong></p>
+    </div>
+
+    <div class="container mt-4" style="max-width: 600px;">
+        <div class="text-center mb-4">
+            <h3 class="text-secondary">Pet Details</h3>
+        </div>
+        
+        <table class="table table-bordered align-middle shadow-sm">
+            <tbody>
+                <tr>
+                    <th class="bg-light text-end px-4 py-3" style="width: 40%;">Name</th>
+                    <td class="px-4 py-3">@Model.Name</td>
+                </tr>
+                <tr>
+                    <th class="bg-light text-end px-4 py-3">Breed</th>
+                    <td class="px-4 py-3">@Model.Breed</td>
+                </tr>
+                <tr>
+                    <th class="bg-light text-end px-4 py-3">Gender</th>
+                    <td class="px-4 py-3">@Model.Gender</td>
+                </tr>
+                <tr>
+                    <th class="bg-light text-end px-4 py-3">Date of Birth</th>
+                    <td class="px-4 py-3">@Model.DateOfBirth.ToString("dd.MM.yyyy г.")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <form asp-action="Delete" method="post" class="mt-4 d-flex justify-content-between">
+        <input type="hidden" asp-for="PetId" />
+        <button type="submit" class="btn btn-danger btn-lg px-4">Confirm Deletion</button>
+        <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">Cancel</a>
+    </form>
 </div>
-
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="PetId" />
-    <button type="submit" class="btn btn-danger">Confirm Deletion</button>
-    <a asp-action="Index" class="btn btn-primary">Cancel</a>
-</form>
