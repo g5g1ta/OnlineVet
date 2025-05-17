@@ -1,13 +1,50 @@
 @model PetCareManager.ViewModels.UserInfoViewModel
-
-<h2>User Profile</h2>
-
-<p><strong>Email:</strong> @Model.Email</p>
-<p><strong>Phone:</strong> @Model.Username</p>
-<p><strong>Roles:</strong></p>
-<ul>
-    @foreach (var role in Model.Roles)
-    {
-        <li>@role</li>
+<style>
+    .card {
+        border-radius: 12px;
     }
-</ul>
+
+    .card-header {
+        border-radius: 12px 12px 0 0;
+    }
+
+    .card-body p {
+        font-size: 1.1rem;
+    }
+
+</style>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"><i class="bi bi-person-circle"></i> My Profile</h3>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <h5 class="text-muted">Email</h5>
+                <p class="fs-5"><i class="bi bi-envelope-fill text-primary me-2"></i>@Model.Email</p>
+            </div>
+
+            <div class="mb-3">
+                <h5 class="text-muted">Username</h5>
+                <p class="fs-5"><i class="bi bi-person-fill text-success me-2"></i>@Model.Username</p>
+            </div>
+
+            <div class="mb-3">
+                <h5 class="text-muted">Roles</h5>
+                @if (Model.Roles != null && Model.Roles.Any())
+                {
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach (var role in Model.Roles)
+                        {
+                            <span class="badge bg-secondary px-4 py-2 fs-5 rounded-pill">@role</span>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">No roles assigned.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
