@@ -1,0 +1,33 @@
+@model List<PetCareManager.Models.VetSchedule>
+
+<h2>Vet Availability</h2>
+
+<div>
+    <a asp-action="AllVets" class="btn btn-secondary">All</a>
+    <a asp-action="AllVets" asp-route-isAvailable="true" asp-route-hasSchedule="true" class="btn btn-success">Available</a>
+    <a asp-action="AllVets" asp-route-isAvailable="false" asp-route-hasSchedule="true" class="btn btn-danger">Unavailable</a>
+    <a asp-action="AllVets" asp-route-hasSchedule="false" class="btn btn-danger">Without Schedule</a>
+</div>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Vet Name</th>
+            <th>Available From</th>
+            <th>Available To</th>
+            <th>Available</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model)
+        {
+            <tr>
+                <td>@schedule.Vet.UserName</td>
+                <td>@schedule.AvailableFrom</td>
+                <td>@schedule.AvailableTo</td>
+                <td>@(schedule.IsAvailable ? "Yes" : "No")</td>
+                <td><a asp-controller="Admin" asp-action="Edit" asp-route-id="@schedule.VetId" class="btn btn-warning">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+@model List<PetCareManager.Models.User>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Vet Name</th>
+            <th>Email</th>
+            <th>PhoneNumber</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vet in Model)
+        {
+            <tr>
+                <td>@vet.UserName</td>
+                <td>@vet.Email</td>
+                <td>@vet.PhoneNumber</td>
+                <td> <a href="@Url.Action("AddSchedule", "Admin", new { vetId = vet.Id })" class="btn btn-primary">Add Schedule</a></td>
+                
+            </tr>
+        }
+    </tbody>
+</table>    

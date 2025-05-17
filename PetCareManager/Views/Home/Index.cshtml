@@ -1,10 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home";
+﻿@model PetCareManager.Models.User
+@{
 
-    var roles = ViewData["Roles"] as IList<string> ?? new List<string>();
-
-    var username = User.Identity?.Name ?? "Guest";
-    var email = ViewData["Email"] as string ?? "No email";
 }
 <style>
     body {
@@ -31,5 +27,6 @@
     <div class="btn-group" role="group" aria-label="Home actions">
         <a asp-controller="Pet" asp-action="Index" class="btn btn-primary btn-lg me-3">Add Pet</a>
         <a asp-controller="Vets" asp-action="Index" class="btn btn-secondary btn-lg">View Vets</a>
+        <a asp-controller="Appointments" asp-action="UserAppointments" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg">View Vets</a>
     </div>
 </div>

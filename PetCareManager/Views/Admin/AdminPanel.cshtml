@@ -7,4 +7,6 @@
     var roles = await UserManager.GetRolesAsync(user);
 }
 
-<h1>@roles.FirstOrDefault()</h1>
+<a asp-controller="Admin" asp-action="AllVets"  class="btn btn-warning">See All Vets</a>
+<a asp-controller="Admin" asp-action="VetsWithoutSchedule"  class="btn btn-warning">See Unscheduled Vets</a>
+<a asp-controller="Admin" asp-action="AllUsers"  class="btn btn-warning">See All Users</a>

@@ -1,0 +1,25 @@
+@model List<PetCareManager.ViewModels.UserViewModel>
+
+<h2>All Users</h2>
+
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.Username</td>
+                <td>@user.Role</td>
+                <td><a asp-controller="Admin" asp-action="ChangeRole" asp-route-id="@user.UserId" class="btn btn-warning">Change Role</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

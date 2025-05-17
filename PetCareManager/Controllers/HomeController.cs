@@ -32,7 +32,7 @@ public class HomeController : Controller
         ViewData["Roles"] = roles;
         ViewData["Email"] = user?.Email ?? "No email";
 
-        return View();
+        return View(user);
     }
     
     public IActionResult Privacy()

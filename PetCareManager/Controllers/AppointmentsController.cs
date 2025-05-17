@@ -73,5 +73,18 @@ namespace PetCareManager.Controllers
 
             return RedirectToAction("VetDashboard");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UserAppointments(int id)
+        {
+            var userId = int.Parse(_userManager.GetUserId(User));
+
+            var appointments = await _context.Appointments
+                .Include(a => a.Pet)
+                .Where(a => a.Pet.OwnerId == userId)
+                .ToListAsync();
+                
+            return View(appointments);
+        }
     }
 }

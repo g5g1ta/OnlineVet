@@ -1,7 +1,7 @@
 public enum AppointmentStatus
 {
-    Pending,      
-    Completed,   
+    Pending,
+    Completed,
     Cancelled     
 }
 namespace PetCareManager.Models{
